@@ -1,58 +1,82 @@
-import { registerauth, verification } from './firebase.js';
+import { registerauth, verification, setregister } from './firebase.js';
 
-const save_auth = document.getElementById('rgsbtn');
+const formulario = document.getElementById('LogUp-Form');
+const boton = document.getElementById('rgsbtn');
+const showPasswordButton = document.getElementById('show-password');
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 async function register() {
-    const email = document.getElementById('email').value;
-    const email2 = document.getElementById('email2').value;
-    const psw = document.getElementById('password').value;
-    const psw2 = document.getElementById('password2').value;
+    const nombres = formulario['edtnom'].value;
+    const apellidos = formulario['edtape'].value;
+    const fecha = formulario['edtfecha'].value;
+    const cedula = formulario['edtcc'].value;
+    const estado = formulario['edtstc'].value;
+    const rh = formulario['edtrh'].value;
+    const genero = formulario['edtgnr'].value;
+    const telefono = formulario['edttlf'].value;
+    const direccion = formulario['edtdirec'].value;
+    const email = formulario['edtemail'].value;
+    const psw = formulario['password'].value;
+    const confirmEmail = formulario['confirmEmail'].value;
+    const confirmPassword = formulario['confirmPassword'].value;
+    const accountType = formulario['accountType'].value;
 
-    const emailRegex = /^[a-zA-Z0-9._-]+@(gmail|hotmail)\.com$/;
-    if (!emailRegex.test(email)) {
-        alert('Por favor, ingrese un correo electrónico válido de Gmail o Hotmail.');
+    if (!email || !psw || !confirmEmail || !confirmPassword || !accountType) {
+        alert('Por favor completa todos los campos.');
         return;
     }
 
-    if (email !== email2) {
+    if (!emailRegex.test(email) || !emailRegex.test(confirmEmail)) {
+        alert('Por favor ingresa un correo electrónico válido.');
+        return;
+    }
+
+    if (email !== confirmEmail) {
         alert('Los correos electrónicos no coinciden.');
         return;
     }
 
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_;.+-])[A-Za-z\d!@#$%^&*()_+-]{8,}$/;;
-    if (!passwordRegex.test(psw)) {
-        alert('La contraseña debe contener al menos 8 caracteres con una combinación de 1 letra mayúscula y 1 letra minúscula, números y un caracter especial.');
+    if (psw !== confirmPassword) {
+        alert('Las contraseñas no coinciden.');
         return;
     }
 
-    if (psw !== psw2) {
-        alert('Las contraseñas no coinciden.');
+    if (!passwordRegex.test(psw)) {
+        alert('La contraseña debe contener al menos 8 caracteres, incluyendo números, letras minúsculas y mayúsculas.');
         return;
     }
 
     try {
         const verificar = await registerauth(email, psw);
-        verification()
-        alert('Registro exitoso para ' + email);
-        alert('¡Correo de Verificacion enviado al usuario!')
-        const user = verificar.user; 
-        window.location.href = "/Index.html";
+        
+        await setregister(nombres, apellidos, fecha, cedula, estado, rh, genero, telefono, direccion, email, accountType);
+
+        await verification();
+
+        alert('Registro exitoso para ' + email + '. Correo de Verificación ha sido enviado.');
+        formulario.reset();
     } catch (error) {
-        if (error.code === "auth/email-already-in-use") {
-            alert('Usuario en uso. Por favor, cámbielo.');
-        } else {
-            alert('Registro no exitoso');
-        }
+        alert('Error en el registro: ' + error.message);
     }
 }
 
-window.addEventListener('DOMContentLoaded', async () => {
-    save_auth.addEventListener('click', register);
+boton.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await register();
 });
 
-document.getElementById("exitbtn").addEventListener("click", function() {
-    window.location.href = "/Index.html";
+showPasswordButton.addEventListener('click', () => {
+    const passwordField = formulario['password'];
+    const confirmPasswordField = formulario['confirmPassword'];
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        confirmPasswordField.type = 'text';
+        showPasswordButton.textContent = 'Ocultar contraseña';
+    } else {
+        passwordField.type = 'password';
+        confirmPasswordField.type = 'password';
+        showPasswordButton.textContent = 'Mostrar contraseña';
+    }
 });
-
-
-
