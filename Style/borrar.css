@@ -1,0 +1,82 @@
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('/Resource/imagen1.png'); /* Reemplaza '/ruta/a/tu/imagen.jpg' con la ruta de tu imagen de fondo */
+    background-size: cover; /* Para asegurarte de que la imagen de fondo cubra toda la pantalla */
+    background-position: center; /* Para centrar la imagen de fondo */
+    background-repeat: no-repeat; /* Para que la imagen de fondo no se repita */
+    font-family: Arial, sans-serif;
+    color: #000; /* Color de texto negro */
+}
+
+.container {
+    margin-top: 50px; /* Margen superior para separar del borde superior */
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo del contenedor con transparencia */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    padding: 20px;
+}
+
+.card-title {
+    color: #1565c0; /* Color del título */
+    font-size: 24px;
+    margin-bottom: 20px; /* Margen inferior */
+}
+
+.form-label {
+    color: #1565c0; /* Color de las etiquetas */
+}
+
+.btn-danger,
+.btn-secondary {
+    color: #000; /* Color del texto */
+    background-color: #ffc107; /* Amarillo */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno */
+    margin-top: 15px; /* Margen superior */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover,
+.btn-secondary:hover {
+    background-color: #ffca28; /* Amarillo más claro */
+}
+
+.btn-secondary {
+    background-color: #2196f3; /* Azul */
+    color: #000; /* Color del texto */
+}
+
+.btn-secondary:hover {
+    background-color: #0d47a1; /* Azul más oscuro */
+}
+
+.form-control {
+    width: 100%; /* Ancho completo */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 15px; /* Margen inferior */
+    border: 1px solid #ccc; /* Borde con color gris */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+.form-text {
+    color: #000; /* Color del texto secundario */
+    font-size: 14px;
+}
