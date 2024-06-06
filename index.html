@@ -1,35 +1,201 @@
 <!DOCTYPE html>
-<html lang="es_CO">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Style/index.css">
-    <title>TALLER DANIEL GALINDO</title>
+    <title>MUNDIGORRAS.web</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
-    <div class="contenedor">
-        <h2>¡Bienvenido de nuevo!</h2>
-        <h3>Correo electrónico:</h3>
-        <input type="text" id="edtemail" placeholder=" ">
-        <h3>Contraseña</h3>
-        <input type="password" id="edtpassword" placeholder=" ">
-        <button id="loginbtn" class="button-login">Iniciar Sesión</button>
-        <button id="signbtn" class="button-singup">Registrarse</button>
-        <div>
-            <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-login_uri="https://your.domain/your_login_endpoint" data-your_own_param_1_to_login="any_value" data-your_own_param_2_to_login="any_value">
-                <button id="googlebtn" class="button-google">Iniciar Sesión con Google</button>
+
+    <header>
+        <div class="header-container">
+            <nav class="menu-desplegable">
+                <button class="menu-button"><i class='bx bx-menu'></i></button>
+                <ul class="menu-list">
+                    <li><a href="#centro-ayuda">Centro de Ayuda</a></li>
+                    <li><a href="#suscripciones">Categorias</a></li>
+                    <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+                </ul>
+            </nav>
+            <h1> MUNDIGORRAS </h1>
+            <div id="profile-section"></div>
+        </div>
+    </header>
+
+    <section class="productos">
+        <h2>Productos de Temporada</h2>
+        <div class="carousel">
+            <button class="carousel-button left"><i class='bx bxs-left-arrow'></i></button>
+            <img src="./resources/images/yankesgorra.jpg" alt="Descuento GORRAS">
+            <img src="./resources/images/wescoltgorra.jpg" alt="Descuento GORRAS">
+            <img src="./resources/images/maclaren.jpg" alt="Descuento GORRAS">
+            <img src="./resources/images/redbull.jpg" alt="Descuento GORRAS">
+            <div class="carousel-track-container">
+                <ul id="carousel-track" class="carousel-track">
+                </ul>
             </div>
-            <div>
-                <button type="button" id="facebooklogin" class="button-facebook">Iniciar Sesión con Facebook</button>
+            <button class="carousel-button right"><i class='bx bxs-right-arrow'></i></button>
+        </div>
+    </section>
+
+    <section class="descuentos">
+        <h2>Descuentos</h2>
+        <div class="discounts-container">
+            <a href="" class="discount-item">
+                <img src="./resources/images/gorraf1(1).jpg" alt="Descuento GORRAS">
+                <h3>Gorras nueva colección</h3>
+                <p>Descuento: 10%</p>
+            </a>
+
+            <a href="" class="discount-item">
+                <img src="./resources/images/wmerchgorra(1).jpg" alt="Descuento GORRAS 2">
+                <h3>Colección antigua</h3>
+                <p>Descuento segunda unidad: 35%</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="catalogo">
+        <h2>Catálogo de Gorras</h2>
+        <div id="catalogo-container" class="catalogo-container">
+
+        </div>
+    </section>
+
+
+    <section id="centro-ayuda" class="contacto">
+        <h2>Centro de Ayuda</h2>
+        <ul>
+
+
+            <li>
+                <h3>Métodos de pago</h3>
+                <p>Descubra qué tipos de métodos de pago aceptamos y cómo puedes pagar tu pedido de gorras con
+                    una tarjeta de débito o crédito.</p>
+                <a href="./templates/centroayuda.html">Aprende más</a>
+            </li>
+
+            <li>
+                <h3>¿por qué no manejamos pago contraentrega?</h3>
+                <p>Descubra por qué nuestra empresa no acepta la opcion de envios con pago contra entrega, 
+                    solo compras en el local o por pago adelantado. </p>
+                <a href="./templates/centroayuda.html">Aprende más</a>
+            </li>
+
+            <li>
+                <h3>Artículos de factura explicados</h3>
+                <p>¿Tiene preguntas sobre los artículos de su factura? Estamos aquí para ayudarle con una explicación
+                    detallada de cada cargo.</p>
+                <a href="./templates/centroayuda.html">Aprende más</a>
+            </li>
+        </ul>
+
+    </section>
+    <section id="suscripciones" class="suscripciones">
+        <h2>Categorias</h2>
+        <div class="suscripciones-container">
+            <div class="plan-item" onclick="window.location.href='#'">
+                <h3>Gorras calidad Originales(1A)</h3>
+                <img src="./resources/images/wescoltgorra.jpg" alt="Planoro">
+                <p>Precio: 300.000</p>
+                <button>Ver más</button>
+            </div>
+
+            <div class="plan-item" onclick="window.location.href='#'">
+                <h3>Gorras calidad AA</h3>
+                <img src="./resources/images/gorragoring.jpg" alt="Planplata">
+                <p>Precio 100.000</p>
+                <button>Ver más</button>
+            </div>
+
+            <div class="plan-item" onclick="window.location.href='#'">
+                <h3>Gorras calidad AAA </h3>
+                <img src="./resources/images/wmerchgorra(1).jpg" alt="Planbronce">
+                <p>Precio: 20.000 - 30.000</p>
+                <button>Ver más</button>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="sobre-nosotros" class="sobre-nosotros">
+        <h2>Sobre Nosotros</h2>
+        <div class="sobre-nosotros-container">
+            <div class="sobre-nosotros-row">
+                <div class="sobre-nosotros-item">
+                    <h3>Nuestra Misión</h3>
+                    <p>Proveer servicios de Compras de gorras al mayor y al detal, al igual que dando la oportunidad de pagar con efectivo y trajeta, buscando asi el constante crecimiento de nuestra empresa día a día.</p>
+                </div>
+                <div class="sobre-nosotros-item">
+                    <h3>Nuestra Visión</h3>
+                    <p>Ser líderes en el mercado de venta de gorras, ser una marca reconocida en todo el pais por la venta y distribucion de gorras de calidad y estilo.</p>
+                </div>
+            </div>
+            <div class="sobre-nosotros-row">
+                <div class="sobre-nosotros-item full-width">
+                    <h3>Nuestros Valores</h3>
+                    <ul>
+                        <li>Compromiso con el cliente</li>
+                        <li>Calidad y seguridad</li>
+                        <li>Sostenibilidad ambiental</li>
+                        <li>Innovación constante</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sobre-nosotros-row">
+                <div class="sobre-nosotros-item">
+                    <h3>Historia</h3>
+                    <p>Fundada en 2019, nuestra empresa nació en la sala de una casa, haciendo ventas por el voz a voz y redes sociales, luego de un tiempo la empresa creció poco a poco hasta el nivel de hoy en día.</p>
+                </div>
+                <div class="sobre-nosotros-item">
+                    <h3>Equipo</h3>
+                    <p>Contamos con un equipo de profesionales apasionados  por el estilo, la moda y lo mas importante: las Gorras.</p>
+                </div>
+            </div>
+            <div class="sobre-nosotros-row">
+                <div class="sobre-nosotros-item full-width">
+                    <h3>Ubicaciones</h3>
+                    <p>Ofrecemos nuestros servicios en yopal y medellin con locales fisicos en ambas ciudades, al igual que envíos nacionales a cualquier parte del país. </p>
+                </div>
             </div>
         </div>
-        <a href="./Templates/contraseña.html" class="text-muted custom-link">¿Olvidaste tu contraseña?</a>
-        <a href="./Templates/borrar_usuario.html" class="text-muted custom-link">¿Desea borrar su usuario?</a>
-    </div>
-    <script type="module" src="./Controller/autenticar.js"></script>
-    <script type="module" src="./Controller/google.js"></script>
-    <script type="module" src="./Controller/facebook.js"></script>
-    <script type="module" src="./Controller/index.js"></script>
-    <script type="module" src="./Controller/borrar.js"></script>
+    </section>
+
+
+
+    <footer>
+        <div class="social-media">
+            <a href="https://facebook.com" target="_blank"><i class='bx bxl-facebook'></i></a>
+            <a href="https://twitter.com" target="_blank"><i class='bx bxl-twitter'></i></a>
+            <a href="https://instagram.com" target="_blank"><i class='bx bxl-instagram'></i></a>
+        </div>
+        <p>&copy; 2024 MUNDIGORRAS. Todos los derechos de la empresa que pague.</p>
+    </footer>
+
+    <script src=""></script>
+    <script>
+        document.querySelector('.menu-button').addEventListener('click', function () {
+            const menuList = document.querySelector('.menu-list');
+            if (menuList.style.display === 'block') {
+                menuList.style.display = 'none';
+            } else {
+                menuList.style.display = 'block';
+            }
+        });
+
+        document.addEventListener('click', function (event) {
+            const menuButton = document.querySelector('.menu-button');
+            const menuList = document.querySelector('.menu-list');
+            if (!menuButton.contains(event.target) && !menuList.contains(event.target)) {
+                menuList.style.display = 'none';
+            }
+        });
+    </script>
+    <script type="module" src="./controllers/home.js"></script>
 </body>
+
 </html>
