@@ -1,4 +1,4 @@
-import { loginout, deleteuser } from '../Controller/firebase.js';
+import { loginout, deleteuser } from './firebase.js';
 
 // Captura los elementos relevantes
 const sesion = document.getElementById('btnlogout'); // Botón para cerrar sesión

@@ -1,4 +1,4 @@
-import { loginauth, viewproducts } from "../Controller/firebase.js";
+import { loginauth, viewproducts } from "./firebase.js";
 
 const recibir = document.getElementById("loginbtn");
 
