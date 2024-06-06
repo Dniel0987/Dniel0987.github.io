@@ -1,58 +1,78 @@
-import { loginout, deleteuser } from './firebase.js';
+import { authState } from "./app.js";
+import { addBikeData, getAllBikes } from "./db/database.js";
 
-// Captura los elementos relevantes
-const sesion = document.getElementById('btnlogout'); // Botón para cerrar sesión
-const modal = new bootstrap.Modal(document.getElementById('deleteUserModal')); // Instancia del modal para eliminar usuario
-const confirmDeleteBtn = document.getElementById('confirmDelete'); // Botón para confirmar la eliminación
+document.addEventListener("DOMContentLoaded", async () => {
+  const catalogoContainer = document.getElementById("catalogo-container");
+  const carouselTrack = document.getElementById("carousel-track");
+  const profileSection = document.getElementById("profile-section");
 
-// Función para cerrar sesión
-async function cerrarSesion() {
-    try {
-        await loginout(); // Espera a que se complete el cierre de sesión
-        alert('Sesión cerrada');
-        window.location.href = "../index.html";
-    } catch (error) {
-        alert('Error al cerrar sesión');
-    }
-}
+  await getAllBikes().then((bikes) => {
+    bikes.forEach((bike) => {
+      let bikeData = bike.data();
+      let bikeId = bike.id; 
+      carouselTrack.innerHTML += `
+        <a href="./templates/details.html?bikeId=${bikeId}" class="carousel-slide">
+            <div class="carousel-content">
+                <img src="${bikeData.picture && bikeData.picture.trim() !== "" ? bikeData.picture : "../resources/images/imgini.png"}" alt="bicicleta">
+                <h3>${bikeData.bikeName}</h3>
+                <h4>Descripcion: ${bikeData.description}</h4>
+                <h5>precio hora: ${bikeData.pricePerHour}</h5>
+                <h5>precio dia: ${bikeData.pricePerDay}</h5>
+                <h5>precio semana: ${bikeData.pricePerWeek}</h5>
+            </div>
+        </a>
+      `;
+      catalogoContainer.innerHTML += `
+        <a href="./templates/details.html?bikeId=${bikeId}" class="catalogo-item">
+            <img src="${bikeData.picture && bikeData.picture.trim() !== "" ? bikeData.picture : "../resources/images/imgini.png"}" alt="bicicleta">
+            <h3>${bikeData.bikeName}</h3>
+            <h4>Descripcion: ${bikeData.description}</h4>
+            <h5>precio hora: ${bikeData.pricePerHour}</h5>
+            <h5>precio dia: ${bikeData.pricePerDay}</h5>
+            <h5>precio semana: ${bikeData.pricePerWeek}</h5>
+        </a>
+      `;
+    });
+  });
+  const track = document.querySelector(".carousel-track");
+  const slides = Array.from(track.children);
+  const nextButton = document.querySelector(".carousel-button.right");
+  const prevButton = document.querySelector(".carousel-button.left");
+  const slideWidth = slides[0].getBoundingClientRect().width;
 
-// Función para abrir el modal de eliminación de usuario
-function abrirModalEliminar() {
-    modal.show(); // Mostrar el modal
-}
+  const setSlidePosition = (slide, index) => {
+    slide.style.left = slideWidth * index + "px";
+  };
+  slides.forEach(setSlidePosition);
 
-// Función para eliminar al usuario
-async function eliminarUsuario() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+  const moveToSlide = (track, currentSlide, targetSlide) => {
+    track.style.transform = "translateX(-" + targetSlide.style.left + ")";
+    currentSlide.classList.remove("current-slide");
+    targetSlide.classList.add("current-slide");
+  };
 
-    // Elimina al usuario
-    const result = await deleteuser(email, password);
+  prevButton.addEventListener("click", (e) => {
+    const currentSlide = track.querySelector(".current-slide") || slides[0];
+    const prevSlide =
+      currentSlide.previousElementSibling || slides[slides.length - 1];
+    moveToSlide(track, currentSlide, prevSlide);
+  });
 
-    if (result) {
-        alert('Usuario eliminado correctamente');
-        // Recarga la página para mostrar los cambios
-        window.location.reload();
+  nextButton.addEventListener("click", (e) => {
+    const currentSlide = track.querySelector(".current-slide") || slides[0];
+    const nextSlide = currentSlide.nextElementSibling || slides[0];
+    moveToSlide(track, currentSlide, nextSlide);
+  });
+
+  await authState((user) => {
+    if (user) {
+      profileSection.innerHTML = `
+        <a href="./templates/profile.html" class="register-link">Ir a perfil</a>
+      `;
     } else {
-        alert('Error al eliminar el usuario. Verifica el correo electrónico y la contraseña.');
+      profileSection.innerHTML = `
+        <a href="./templates/register.html" class="register-link">Registro | Iniciar Sesión</a>
+      `;
     }
-}
-
-// Escucha el evento click del botón "Cerrar Sesión"
-sesion.addEventListener('click', cerrarSesion);
-// Escucha el evento click del botón "Eliminar Usuario"
-document.getElementById('btndelete').addEventListener('click', abrirModalEliminar);
-// Escucha el evento click del botón para confirmar la eliminación
-confirmDeleteBtn.addEventListener('click', eliminarUsuario);
-
-// Escucha el evento click del botón para mostrar/ocultar la contraseña
-document.getElementById('togglePassword').addEventListener('click', () => {
-    const passwordInput = document.getElementById('password');
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        document.getElementById('togglePassword').textContent = 'Ocultar';
-    } else {
-        passwordInput.type = 'password';
-        document.getElementById('togglePassword').textContent = 'Mostrar';
-    }
+  });
 });
