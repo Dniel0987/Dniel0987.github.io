@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos de Pago</title>
+    <link rel="stylesheet" href="../styles/metodospay.css">
+</head>
+<body>
+    <header>
+        <h1>Métodos de Pago</h1>
+    </header>
+
+    <main>
+        <section class="payment-methods">
+            <h2>Seleccione su método de pago</h2>
+            <div class="payment-option">
+                <input type="radio" id="debit-card" name="payment-option" value="debit-card">
+                <label for="debit-card">Tarjeta de Débito</label>
+            </div>
+            <div class="payment-option">
+                <input type="radio" id="credit-card" name="payment-option" value="credit-card">
+                <label for="credit-card">Tarjeta de Crédito</label>
+            </div>
+            <div class="payment-option">
+                <input type="radio" id="efecty-transfer" name="payment-option" value="efecty-transfer">
+                <label for="efecty-transfer">Transferencia desde Efecty</label>
+            </div>
+        </section>
+
+        <section id="card-info" class="payment-details hidden">
+            <h2>Información de la Tarjeta</h2>
+            <form action="#">
+                <label for="card-number">Número de Tarjeta:</label>
+                <input type="text" id="card-number" name="card-number" pattern="[0-9]{16}" placeholder="Ingrese los 16 dígitos" required>
+
+                <label for="expiration-date">Fecha de Vencimiento (MM/AA):</label>
+                <input type="text" id="expiration-date" name="expiration-date" pattern="(0[1-9]|1[0-2])\/?([0-9]{2})" placeholder="MM/AA" required>
+
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Ingrese su número de teléfono" required>
+
+                <button type="submit" class="submit-payment">Continuar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Rentapp</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cardOption = document.querySelectorAll('input[name="payment-option"]');
+            const cardInfo = document.getElementById('card-info');
+
+
+            cardOption.forEach(function(option) {
+                option.addEventListener('change', function() {
+                    if (this.value === 'debit-card' || this.value === 'credit-card') {
+                        cardInfo.classList.remove('hidden');
+                    } else {
+                        cardInfo.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+

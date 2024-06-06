@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Rentas</title>
+    <link rel="stylesheet" href="../styles/carrito.css">
+</head>
+<body>
+    <header>
+        <h1>Rentapp</h1>
+    </header>
+    <div class="container">
+        <main id="cart-container">
+            <!-- Productos del carrito se cargarán aquí -->
+        </main>
+        <aside class="summary">
+            <h2>Resumen de Compra</h2>
+            <p>Total de Productos: <span id="totalProducts">0</span></p>
+            <p>Total a Pagar: $<span id="totalPrice">0</span></p>
+            <button class="pay-button" id="rentButton">Rentar</button>
+        </aside>
+    </div>
+    <footer>
+        <p>&copy; 2024 Rentapp</p>
+    </footer>
+
+    <script type="module">
+        import { getBikeById } from "../controllers/db/database.js";
+
+        async function loadCartItems() {
+            const cartContainer = document.getElementById('cart-container');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cartContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = '<p>Tu carrito está vacío.</p>';
+                return;
+            }
+
+            for (const bikeId of cart) {
+                const bikeDoc = await getBikeById(bikeId);
+                if (bikeDoc.exists()) {
+                    const bikeData = bikeDoc.data();
+                    const productHTML = `
+                        <div class="product" data-id="${bikeId}">
+                            <img src="${bikeData.picture || '/Resources/imgini.png'}" alt="${bikeData.bikeName}">
+                            <div class="product-details">
+                                <h2>${bikeData.bikeName}</h2>
+                                <p class="price">$${bikeData.pricePerDay}</p>
+                                <label for="quantity-${bikeId}">Cantidad:</label>
+                                <select id="quantity-${bikeId}" name="quantity" onchange="updateTotal()">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <button class="remove-button" onclick="removeProduct('${bikeId}')">Eliminar</button>
+                            </div>
+                        </div>
+                    `;
+                    cartContainer.innerHTML += productHTML;
+                }
+            }
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let totalProducts = 0;
+            let totalPrice = 0;
+            document.querySelectorAll('.product').forEach(product => {
+                const quantity = parseInt(product.querySelector('select').value);
+                const price = parseFloat(product.querySelector('.price').textContent.replace('$', ''));
+                totalProducts += quantity;
+                totalPrice += quantity * price;
+            });
+            document.getElementById('totalProducts').textContent = totalProducts;
+            document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+        }
+
+        function removeProduct(bikeId) {
+            const product = document.querySelector(`.product[data-id="${bikeId}"]`);
+            product.remove();
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(id => id !== bikeId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateTotal();
+        }
+
+        function redirectToPayment() {
+            window.location.href = 'metodospay.html';
+        }
+
+        window.removeProduct = removeProduct; // Expose removeProduct to global scope
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('rentButton').addEventListener('click', redirectToPayment);
+            loadCartItems();
+        });
+    </script>
+</body>
+</html>

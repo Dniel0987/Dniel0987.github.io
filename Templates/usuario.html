@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Bicicletas</title>
+    <link rel="stylesheet" href="../styles/usuario.css">
+</head>
+<body>
+    <header>
+        <h1>Rentapp</h1>
+    </header>
+
+    <main>
+        <section class="list-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Imagen</th>
+                        <th>Descripción</th>
+                        <th>Administrar</th>
+                    </tr>
+                </thead>
+                <tbody id="owner-bikes">
+                </tbody>
+            </table>
+            <button id="addBikeButton" class="btn">Agregar Bicicleta</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Rentapp</p>
+    </footer>
+
+    <script type="module" src="../controllers/ownerBikesController.js"></script>
+</body>
+</html>
+
+
+
+

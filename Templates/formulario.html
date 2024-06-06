@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar/Actualizar Bicicleta</title>
+    <link rel="stylesheet" href="../styles/formulario.css">
+</head>
+
+<body>
+    <header>
+        <h1>Bicicletas</h1>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <form id="bikeForm">
+                <!-- 
+                <label for="bikeId">ID (para actualizar):</label>
+                <input type="text" id="bikeId" name="bikeId" readonly>
+                -->
+                <label for="bikeName">Nombre:</label>
+                <input type="text" id="bikeName" name="bikeName" required>
+
+                <label for="bikePrice">Precio hora:</label>
+                <input type="number" id="bikePriceByHour" name="bikePriceByHour" required>
+
+                <label for="bikePrice">Precio dia:</label>
+                <input type="number" id="bikePriceByDay" name="bikePriceByDay" required>
+
+                <label for="bikePrice">Precio semana:</label>
+                <input type="number" id="bikePriceByWeek" name="bikePriceByWeek" required>
+
+                <label for="bikeImage">Imagen:</label>
+                <input type="text" id="bikeImage" name="bikeImage" required>
+
+                <label for="bikeDescription">Descripción:</label>
+                <input id="bikeDescription" name="bikeDescription" rows="4" required>
+
+                <label for="bikematerial">Material:</label>
+                <input type="text" id="bikeMaterial" name="bikeName" required>
+
+                <label for="bikesize">Tamaño de rueda:</label>
+                <input type="text" id="bikeSize" name="bikeName" required>
+
+                <label for="bikesize">Tipo de suspencion:</label>
+                <input type="text" id="bikeSuspension" name="bikeName" required>
+
+                <label for="bikesize">Tipo de frenos:</label>
+                <input type="text" id="bikeBreaks" name="bikeName" required>
+
+                <label for="bikesize">Cantidad de cambios:</label>
+                <input type="text" id="bikeGears" name="bikeName" required>
+
+                <button type="button" id="save-btn" class="btn">Guardar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Rentapp</p>
+    </footer>
+
+    <script type="module" src="../controllers/addBikeController.js"></script>
+</body>
+
+</html>

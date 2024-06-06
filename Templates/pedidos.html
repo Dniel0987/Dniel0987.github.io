@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos Recientes</title>
+    <link rel="stylesheet" href="/Styles/pedidos.css">
+</head>
+<body>
+    <header>
+        <h1>Pedidos Recientes</h1>
+    </header>
+
+    <main>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Pedido</th>
+                        <th>Cliente</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Total</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                        <th>Completar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>Juan Pérez</td>
+                        <td>Bicicleta de Montaña</td>
+                        <td>2</td>
+                        <td>$1000</td>
+                        <td>01/06/2024</td>
+                        <td>Pendiente</td>
+                        <td><button class="notify-button" onclick="notifyUser('Juan Pérez')">Notificar</button></td>
+                        <td><button class="complete-button" onclick="completeOrder(this)">✔</button></td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>María Gómez</td>
+                        <td>Bicicleta Urbana</td>
+                        <td>1</td>
+                        <td>$2000</td>
+                        <td>02/06/2024</td>
+                        <td>Enviado</td>
+                        <td><button class="notify-button" onclick="notifyUser('María Gómez')">Notificar</button></td>
+                        <td><button class="complete-button" onclick="completeOrder(this)">✔</button></td>
+                    </tr>
+                    <!-- Más filas de ejemplo -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Rentapp</p>
+    </footer>
+
+    <script>
+        function notifyUser(cliente) {
+            alert(`El pedido de ${cliente} ya está disponible para su recogida.`);
+        }
+
+        function completeOrder(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
+    </script>
+</body>
+</html>
