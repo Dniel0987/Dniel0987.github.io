@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url("/Resource/imagen1.png");
+    background-image: url("/Resource/fondo.jpg");
     background-size: cover;
     background-position: center;
     color: #0d47a1; /* Azul */
