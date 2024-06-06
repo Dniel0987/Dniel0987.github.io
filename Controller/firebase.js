@@ -132,6 +132,15 @@ export const addregister = (nombres, apellidos, fecha, cedula, estado, rh, gener
     tipoCuenta: tipoCuenta
   });
 
+export const addCap = (color, marca, talla, precio, stock, imagen) =>
+  addDoc(collection(db, "gorras"), {
+    color,
+    marca,
+    talla,
+    precio,
+    stock,
+    imagen
+  });
 export const viewproducts = () =>
   getDocs(collection(db, "Usuarios"));
 

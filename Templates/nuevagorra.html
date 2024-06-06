@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Nueva Gorra</title>
+</head>
+<body>
+    <h2>Agregar Nueva Gorra</h2>
+    <form id="addCapForm">
+        <div>
+            <label for="color">Color:</label>
+            <input type="text" id="color" name="color" required>
+        </div>
+        <div>
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" name="marca" required>
+        </div>
+        <div>
+            <label for="talla">Talla:</label>
+            <input type="text" id="talla" name="talla" required>
+        </div>
+        <div>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" required>
+        </div>
+        <div>
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" name="stock" required>
+        </div>
+        <div>
+            <label for="imagen">Enlace de la Imagen:</label>
+            <input type="url" id="imagen" name="imagen" required>
+        </div>
+        <button type="submit">Agregar Gorra</button>
+    </form>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"></script>
+    <script src="firebase.js"></script>
+    <script>
+        const form = document.getElementById('addCapForm');
+    
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Evitar que el formulario se envíe de forma predeterminada
+    
+            // Obtener los valores del formulario
+            const color = form.color.value;
+            const marca = form.marca.value;
+            const talla = form.talla.value;
+            const precio = parseFloat(form.precio.value);
+            const stock = parseInt(form.stock.value);
+            const imagen = form.imagen.value;
+    
+            try {
+                // Guardar los datos en Firestore usando la nueva función addCap de firebase.js
+                await addCap(color, marca, talla, precio, stock, imagen);
+                alert('¡La gorra ha sido agregada correctamente!');
+                form.reset(); // Limpiar el formulario después de agregar la gorra
+            } catch (error) {
+                console.error('Error al agregar la gorra:', error);
+                alert('Hubo un error al agregar la gorra. Por favor, inténtalo de nuevo.');
+            }
+        });
+    </script>
+    
+
+
+</body>
+</html>

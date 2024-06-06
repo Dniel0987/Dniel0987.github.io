@@ -19,6 +19,8 @@
         <button type="button" id="btnPassword" class="btn btn-danger custom-btn" onclick="window.location.href='/Templates/contraseña.html'">Cambiar Contraseña</button>
         <button type="button" class="btn btn-danger custom-btn" id="btnlogout">Cerrar Sesión</button>
         <button type="button" class="btn btn-danger custom-btn" id="btndelete" data-bs-toggle="modal" data-bs-target="#deleteUserModal">Eliminar Usuario</button>
+        <button type="button" class="btn btn-danger custom-btn" id="btnAgregarGorra">Agregar Gorra</button>
+
     </div>
     
     <!-- Modal para eliminar usuario -->
@@ -51,5 +53,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../Controller/home.js"></script>
+    <script>
+        document.getElementById('btnAgregarGorra').addEventListener('click', () => {
+            window.location.href = './Templates/nuevagorra.html';
+        });
+    </script>
 </body>
 </html>
