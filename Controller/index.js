@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.getElementById("signbtn").addEventListener("click", function() {
-    window.location.href = "/Templates/registrar.html";
+    window.location.href = "./Templates/registrar.html";
 });
 
 
